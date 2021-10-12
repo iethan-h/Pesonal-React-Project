@@ -20,8 +20,8 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
-          {!sessionUser}
+          <Route exact path="/home">
+          {!sessionUser }
           <Home>Home</Home>
         </Route>
           <Route path="/signup">
