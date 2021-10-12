@@ -13,3 +13,38 @@ button{
 button:hover{
     background-color:#00a82d;
 }
+
+.footer{
+    position: fixed;
+    margin:center;
+    justify-content: center;
+    
+    display: flex;
+    bottom: 0;
+    width: 100%;
+}
+.links{
+    padding-top: 19px;
+    padding-left: 5px;
+}
+#linkedin{
+    padding-left: 5px;
+    font-size:19px;
+}
+#github{
+    font-size: 19px;
+}
+.nav{
+    padding-bottom: 5px;
+    border-left: 0;
+    border-bottom: 1px solid #e4eef8;
+}
+#line{
+    position: fixed;
+    margin:center;
+    bottom: 45px;
+    width: 100%
+}
+hr{
+   width:30%    
+}
