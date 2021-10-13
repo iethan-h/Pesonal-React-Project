@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const MAKE_NOTEBOOK = 'session/setnotebook';
 
 const setUser = (user) => {
   return {
@@ -16,6 +17,13 @@ const removeUser = () => {
     type: REMOVE_USER,
   };
 };
+
+const makeNotebook = (notebook) => {
+  return {
+    type: MAKE_NOTEBOOK,
+    notebook
+  }
+}
 
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
@@ -83,6 +91,24 @@ export const logout = () => async (dispatch) => {
   dispatch(removeUser());
   return response;
 };
+
+
+//Thunk Action for Making a new Notebook
+export const CreateNotebook = (note) => async(dispatch) => {
+  const {user_id, title,contents} = note;
+  const response = await csrfFetch("/api/notebook", {
+      method:"POST",
+      body: JSON.stringify({
+          user_id,
+          title,
+          contents
+      }),
+  });
+  const data = await response.json();
+  dispatch(makeNotebook(data.note));
+  return response;
+}
+
 
 
 export default sessionReducer;
