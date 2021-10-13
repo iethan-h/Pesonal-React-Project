@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Footer from "./components/footer";
 import Home from "./components/home-page";
+import LandingPage from "./components/landingPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Switch>
           <Route exact path="/">
           {!sessionUser }
+          <LandingPage />
         </Route>
           <Route path="/home">
             <Home />
