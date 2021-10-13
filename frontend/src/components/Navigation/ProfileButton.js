@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import {useHistory} from 'react-router-dom';
-import style from './Navigation.model.css';
+import style from './Navigation.module.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();

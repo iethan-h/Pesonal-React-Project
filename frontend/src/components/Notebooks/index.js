@@ -7,7 +7,6 @@ import NewNotebook from "./newNotebook"
 
 const Notebook = () => {
     const [showModal, setShowModal] = useState(false);
-    const sessionUser = useSelector((state) => state.session.user);
    
     return(
         <>
@@ -18,10 +17,7 @@ const Notebook = () => {
       <div>
         
           <button
-            onClick={() => setShowModal(true)}>
-            New Notebook
-          </button>
-       
+            onClick={() => setShowModal(true)}>New Notebook</button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <NewNotebook />
