@@ -1,0 +1,16 @@
+.welcome{
+    display: flex;
+    margin: center;
+    justify-content:center;
+    align-items:center;
+}
+.welcomeLine{
+    width:75%
+}
+.aboutApp{
+    padding-top: 40px;
+    width:25%;
+}
+.statement{
+    font-size:20px;
+}
