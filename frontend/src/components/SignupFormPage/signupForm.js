@@ -36,7 +36,7 @@ const SignupForm = () => {
     <div className={style.formContainer}>
       <form className={style.form} onSubmit={handleSubmit}>
         <fieldset className={style.field}>
-          <legend className={style.field}>Sign Up For Ulti Note</legend>
+          <legend className={style.field}>Sign Up For Ulti Notes!</legend>
           <div className={style.errorsContainer}>
             <ul>
               {errors.map((error, idx) => (

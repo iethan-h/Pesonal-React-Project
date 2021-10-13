@@ -11,7 +11,6 @@ const SignupFormModal = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.titleContainer}>
-        <p className={style.title}>Ulti Notes!</p>
       </div>
       <div className={style.modalContainer}>
         {!sessionUser && (

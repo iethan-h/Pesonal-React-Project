@@ -15,6 +15,7 @@ const Navigation = ({ isLoaded }) => {
         <>
           <ProfileLinks />
           <ProfileButton user={sessionUser} />
+          
         </>
       );
     } else {
