@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/footer";
 import Home from "./components/home-page";
 import LandingPage from "./components/landingPage";
+import Notebook from "./components/Notebooks";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         </Route>
           <Route path="/home">
             <Home />
+            <Notebook />
           </Route>
         <Route>
           <h1>Page not found</h1>
