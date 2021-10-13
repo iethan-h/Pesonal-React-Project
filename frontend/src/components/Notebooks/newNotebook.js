@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch} from "react-redux";
 import * as sessionActions from "../../store/session";
 
 const NewNotebook = () => {
     const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+    //const sessionUser = useSelector((state) => state.session.user);
     
     const [title,setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   
-    if (sessionUser) return <Redirect to="/" />;
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      if(!title){
+      if(title.length){
           setErrors([]);
-      }
-      
+      return dispatch(
+          sessionActions.CreateNotebook({title})
+        )}
       return setErrors([
-        "Confirm Password field must be the same as the Password field",
+        "Pleas title your new notebook.",
       ]);
     }
 
