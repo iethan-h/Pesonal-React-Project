@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
@@ -5,10 +6,10 @@ import styles from "./Navigation.module.css";
 export const ProfileLinks = () => {
   return (
     <div>
-      <NavLink activeClassName={styles.activeNav} to="/notebooks">
+      <NavLink to="/notebooks">
         Notebooks
       </NavLink>
-      <NavLink activeClassName={styles.activeNav} to="/notes">
+      <NavLink to="/notes">
         Notes
       </NavLink>
     </div>

@@ -9,21 +9,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Users" },
       },
       notebook_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Notebooks" },
       },
       content: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT(500)
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
       }
     });
   },

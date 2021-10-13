@@ -52,6 +52,16 @@ const initialState = { user: null };
 const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case MAKE_NOTEBOOK:
+        return {
+            ...state,
+            [action.notebook.id]: action.notebook
+        }
+    case MAKE_NOTE:
+        return {
+            ...state,
+            [action.note.id]: action.note
+        }
     case SET_USER:
       newState = Object.assign({}, state);
       newState.user = action.payload;
@@ -62,16 +72,7 @@ const sessionReducer = (state = initialState, action) => {
       return newState;
     default:
       return state
-      case MAKE_NOTEBOOK:
-        return {
-            ...state,
-            [action.notebook.id]: action.notebook
-        }
-        case MAKE_NOTE:
-          return {
-              ...state,
-              [action.note.id]: action.note
-          }
+      
          
   }
 };

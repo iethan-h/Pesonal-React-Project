@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
@@ -31,11 +32,11 @@ const SignupForm = () => {
   };
 
   return (
-    <div className={style.formContainer}>
-      <form className={style.form} onSubmit={handleSubmit}>
-        <fieldset className={style.field}>
-          <legend className={style.field}>Sign Up For Ulti Notes!</legend>
-          <div className={style.errorsContainer}>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <legend>Sign Up For Ulti Notes!</legend>
+          <div>
             <ul>
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
@@ -44,7 +45,7 @@ const SignupForm = () => {
           </div>
           <div>
             <label>Email:</label>
-            <div className={style.inputContainer}>
+            <div>
               <input
                 type="text"
                 value={email}
@@ -55,7 +56,7 @@ const SignupForm = () => {
           </div>
           <div>
             <label>Username:</label>
-            <div className={style.inputContainer}>
+            <div>
               <input
                 type="text"
                 value={username}
@@ -66,7 +67,7 @@ const SignupForm = () => {
           </div>
           <div>
             <label>Password:</label>
-            <div className={style.inputContainer}>
+            <div>
               <input
                 type="password"
                 value={password}
@@ -77,7 +78,7 @@ const SignupForm = () => {
           </div>
           <div>
             <label>Confirm Password:</label>
-            <div className={style.inputContainer}>
+            <div>
               <input
                 type="password"
                 value={confirmPassword}
@@ -86,7 +87,7 @@ const SignupForm = () => {
               />
             </div>
           </div>
-          <div className={style.buttonContainer}>
+          <div>
             <button type="submit">Sign Up</button>
           </div>
         </fieldset>

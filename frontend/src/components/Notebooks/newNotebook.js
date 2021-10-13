@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import * as sessionActions from "../../store/session";
 
-const NewNotebook = () => {
+const NewNotebook = (notebook) => {
     const dispatch = useDispatch();
     //const sessionUser = useSelector((state) => state.session.user);
     
@@ -42,7 +42,10 @@ const NewNotebook = () => {
              />
          </div>
          <div>
-             <button type="submit">Create</button>
+             <button 
+             type="submit" 
+             
+             >Create</button>
          </div>
         </fieldset>
       </form>
