@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { csrfFetch } from "./csrf";
 const LOAD_NOTES = "note/load";
 const CREATE_NOTE = "note/add";

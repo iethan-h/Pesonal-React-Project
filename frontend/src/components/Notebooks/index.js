@@ -5,17 +5,17 @@ import { useSelector } from "react-redux";
 import { Modal } from "../../context/Modal";
 import NewNotebook from "./newNotebook"
 
+
 const Notebook = () => {
     const [showModal, setShowModal] = useState(false);
-   
+
     return(
         <>
     <div>
-        <p>test</p>
+        
       <div>
       </div>
-      <div>
-        
+      <div>       
           <button
             onClick={() => setShowModal(true)}>New Notebook</button>
         {showModal && (
@@ -23,6 +23,12 @@ const Notebook = () => {
             <NewNotebook />
           </Modal>
         )}
+      </div>
+      <div>
+        {/* TODO: Map through the notebooks and display them in the dropdown */}
+        {/* <select>
+          <option value ={} />
+        </select> */}
       </div>
     </div>   
             

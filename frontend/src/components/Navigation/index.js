@@ -30,8 +30,10 @@ function Navigation({ isLoaded }){
       <ul>
         <li className={style.nav}>
           <NavLink exact to="/">Home</NavLink>
+          <NavLink exact to="/demo">Demo</NavLink>
           {isLoaded && sessionLinks}
         </li>
+        
       </ul>
     </div>
  

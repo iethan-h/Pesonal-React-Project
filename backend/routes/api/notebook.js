@@ -24,4 +24,15 @@ router.get(
   })
 );
 
+//Create a new notebook
+router.post(
+  '/',
+  
+  asyncHandler(async (req, res) =>{
+    const{title,userId:userId} = req.body;    
+    const notebook = await Notebook.create({title,user_id:userId});
+    res.json(notebook);
+  })
+);
+
 module.exports = router;
