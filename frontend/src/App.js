@@ -29,7 +29,6 @@ function App() {
           <LandingPage />
         </Route>
           <Route path="/home">
-            <Home />
             <Notebook />
           </Route>
         <Route>

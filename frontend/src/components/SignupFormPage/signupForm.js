@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import style from "./Signup.module.css";
+import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -12,11 +13,13 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(

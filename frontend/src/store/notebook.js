@@ -6,7 +6,7 @@ const EDIT_NOTEBOOK = "notebook/update";
 const DELETE_NOTEBOOK = "notebook/remove";
 
 
-const loadNotebook = (notebook) => {
+export const loadNotebook = (notebook) => {
   return {
     type: LOAD_NOTEBOOKS,
     notebook,
@@ -37,7 +37,7 @@ export const CreateNotebook = (title, userId) => async(dispatch) => {
 
 //Edit a notebook
 
-const editNotebook = (notebookId) => {
+export const editNotebook = (notebookId) => {
   return {
     type: EDIT_NOTEBOOK,
     notebookId,
@@ -46,7 +46,7 @@ const editNotebook = (notebookId) => {
 
 //Delete a notebook.
 
-const deleteNotebook = (notebookId) => {
+export const deleteNotebook = (notebookId) => {
   return {
     type: DELETE_NOTEBOOK,
     notebookId,

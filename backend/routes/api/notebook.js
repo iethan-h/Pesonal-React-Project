@@ -11,7 +11,7 @@ const validateNotebook = [];
 
 // Get all notebooks that belong to a user
 router.get(
-  "/",
+  "/notebooks",
   requireAuth,
   asyncHandler(async (req, res, next) => {
     const userId = req.user.id;
