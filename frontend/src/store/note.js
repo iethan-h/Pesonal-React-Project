@@ -1,10 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { csrfFetch } from "./csrf";
-/*-------------Types-------------*/
 const LOAD_NOTES = "note/load";
-const ADD_NOTE = "note/add";
+const CREATE_NOTE = "note/add";
 const UPDATE_NOTE = "note/update";
 const DELETE_NOTE = "note/remove";
-/*-------------ACTIONS-------------*/
+
 const loadNote = (notes) => {
   return {
     type: LOAD_NOTES,
@@ -12,9 +12,9 @@ const loadNote = (notes) => {
   };
 };
 
-const add = (note) => {
+const createNote = (note) => {
   return {
-    type: ADD_NOTE,
+    type: CREATE_NOTE,
     note,
   };
 };
@@ -32,27 +32,25 @@ const deleteNote = (noteId) => {
     noteId,
   };
 };
-/*-------------THUNK CREATORS-------------*/
 
 export const loadNotes = () => async (dispatch) => {
-  const res = await csrfFetch("/api/notes");
-  const notes = await res.json();
+  const response = await csrfFetch("/api/notes");
+  const notes = await response.json();
   dispatch(loadNote(notes));
-  return res;
+  return response;
 };
 
-/*-------------REDUCERS-------------*/
 const initialState = {};
 const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_NOTES: {
-      const userNotes = {};
+      const notebookNotes = {};
       action.notes.forEach((note) => {
-        userNotes[note.id] = note;
+        notebookNotes[note.id] = note;
       });
       return {
         ...state,
-        ...userNotes,
+        ...notebookNotes,
       };
     }
     default:

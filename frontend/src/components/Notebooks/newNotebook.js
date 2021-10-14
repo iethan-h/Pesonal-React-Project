@@ -1,27 +1,32 @@
-import React, { useState } from "react";
-import { useDispatch} from "react-redux";
-import * as sessionActions from "../../store/session";
+import React, { useState} from "react";
+import { useDispatch,useSelector} from "react-redux";
+import * as notebookActions from "../../store/notebook";
+
 
 const NewNotebook = (notebook) => {
     const dispatch = useDispatch();
-    //const sessionUser = useSelector((state) => state.session.user);
+    const userId=useSelector((state)=>state.session.user.id)
+    
     
     const [title,setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       if(title.length){
           setErrors([]);
-      return dispatch(
-          sessionActions.CreateNotebook({title})
-        )}
-      return setErrors([
+          
+      dispatch(
+          notebookActions.CreateNotebook(title, userId)          
+        )}else{
+          setErrors([
         "Pleas title your new notebook.",
       ]);
-    }
-
+        }
+       
+    };
+console.log("###",userId);
     return(
         <div>
       <form onSubmit={handleSubmit}>
@@ -44,7 +49,7 @@ const NewNotebook = (notebook) => {
          <div>
              <button 
              type="submit" 
-             
+             onClick={handleSubmit}
              >Create</button>
          </div>
         </fieldset>
