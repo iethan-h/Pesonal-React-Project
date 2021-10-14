@@ -6,7 +6,7 @@ import * as notebookActions from "../../store/notebook";
 const NewNotebook = (notebook) => {
     const dispatch = useDispatch();
     const userId=useSelector((state)=>state.session.user.id)
-    const [showModal, setShowModal] = useState(false);
+    //const [showModal, setShowModal] = useState(false);
     
     const [title,setTitle] = useState("");
     const [errors, setErrors] = useState([]);
@@ -14,7 +14,7 @@ const NewNotebook = (notebook) => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      setShowModal(false)
+      //setShowModal(false)
       if(title.length){
           setErrors([]);
           

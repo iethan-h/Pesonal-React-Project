@@ -10,6 +10,7 @@ import NotebookNav from "./notebookNav";
 const Notebook = () => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
+    const user = useSelector(store => store.session.user);
     
     return(
         <>
@@ -26,7 +27,9 @@ const Notebook = () => {
           </Modal>
         )}
       </div>
-      <NotebookNav />
+      {user ?
+       (<NotebookNav id={user.id} />) : null}
+      
       <div>
         {/* TODO: Map through the notebooks and display them in the dropdown */}
         

@@ -8,7 +8,7 @@ const notesRouter = require("./note");
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
-router.use("/notebook", notebookRouter);
+router.use("/notebooks", notebookRouter);
 router.use("/notes", notesRouter);
 
 

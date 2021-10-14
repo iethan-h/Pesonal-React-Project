@@ -11,13 +11,13 @@ const validateNotebook = [];
 
 // Get all notebooks that belong to a user
 router.get(
-  "/notebooks",
+  "/:id",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const userId = req.user.id;
+    const userId = req.params.id;
     const notebooks = await Notebook.findAll({
       where: {
-        userId,
+        user_id:userId,
       },
     });
     return res.json(notebooks);
@@ -26,13 +26,29 @@ router.get(
 
 //Create a new notebook
 router.post(
-  '/',
-  
+  '/',  
   asyncHandler(async (req, res) =>{
     const{title,userId:userId} = req.body;    
     const notebook = await Notebook.create({title,user_id:userId});
     res.json(notebook);
   })
+);
+
+
+//Delete a notebook
+router.delete(
+	'/:id(\\d+)',
+	requireAuth,
+	asyncHandler(async (req, res, next) => {
+		const notebookId = req.params.id;
+		const findNotebook = await db.Notes.findByPk(notebookId);
+		if (findNotebook) {
+			const notebook = await findNotebook.destroy();
+			res.status(204).end();
+		} else {
+			next();
+		}
+	})
 );
 
 module.exports = router;

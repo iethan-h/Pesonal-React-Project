@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { csrfFetch } from "./csrf";
-const LOAD_NOTEBOOKS = "notebook/load";
+const LOAD_NOTEBOOK = "notebook/load";
 const CREATE_NOTEBOOK = "notebook/add";
 const EDIT_NOTEBOOK = "notebook/update";
 const DELETE_NOTEBOOK = "notebook/remove";
@@ -8,7 +8,7 @@ const DELETE_NOTEBOOK = "notebook/remove";
 
 export const loadNotebook = (notebook) => {
   return {
-    type: LOAD_NOTEBOOKS,
+    type: LOAD_NOTEBOOK,
     notebook,
   };
 };
@@ -28,13 +28,18 @@ export const CreateNotebook = (title, userId) => async(dispatch) => {
           title,          
       }),
   });
-  
-  
+
   const data = await response.json();
   dispatch(addNotebook(data));
   return response;
 }
-
+export const DeleteNotebok = (id) => async(dispatch) => {
+    const  response = await csrfFetch(`/api/notebook/${id}`,{
+      method:"DELETE",
+      header:{"Content-Type":"application/json"}      
+    })
+    return response;
+  }
 //Edit a notebook
 
 export const editNotebook = (notebookId) => {
@@ -55,8 +60,8 @@ export const deleteNotebook = (notebookId) => {
 
 //Load notebooks
 
-export const loadNotebooks = () => async (dispatch) => {
-  const res = await csrfFetch("/api/notebooks");
+export const loadNotebooks = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/notebooks/${id}`);
   const notebooks = await res.json();
   dispatch(loadNotebook(notebooks));
   return res;
@@ -69,9 +74,18 @@ const initialState = {};
 
 const notebookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_NOTEBOOKS: {
+    
+      case DELETE_NOTEBOOK:{
+        const newState = { ...state };
+        delete newState[action.itemId];
+        return newState;
+      
+    }
+    
+    
+    case LOAD_NOTEBOOK: {
       const notebookList = {};
-      action.notebooks.forEach((notebook) => {
+      action.notebook.forEach((notebook) => {
         notebookList[notebook.id] = notebook;
       });
       return {
@@ -87,6 +101,7 @@ const notebookReducer = (state = initialState, action) => {
             ...state,
             [action.notebook.id]: action.notebook
         }
+        
     
   }
 };
