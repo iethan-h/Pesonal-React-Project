@@ -38,10 +38,10 @@ router.post(
 //Delete a notebook
 router.delete(
 	'/:id(\\d+)',
-	requireAuth,
+	
 	asyncHandler(async (req, res, next) => {
-		const notebookId = req.params.id;
-		const findNotebook = await db.Notes.findByPk(notebookId);
+		const notebook_id = req.params.id;
+		const findNotebook = await Notebook.findByPk(notebook_id);
 		if (findNotebook) {
 			const notebook = await findNotebook.destroy();
 			res.status(204).end();

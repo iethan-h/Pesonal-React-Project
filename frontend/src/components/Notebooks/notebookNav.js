@@ -13,20 +13,23 @@ const NotebookNav =({id}) => {
    const [deleteANotebook,setDeleteANotebook] = useState(false);
    const [currentNotebook, setCurrentNotebook] = useState()
    
-   const test = {};
-    if(notebooks !== undefined){
-        Object.values(notebooks).map((notebook) => test[notebook.id]=notebook);       
-    }
-    console.log(test[5]);
+//    const test = {};
+//     if(notebooks !== undefined){
+//         Object.values(notebooks).map((notebook) => test[notebook.id]=notebook);       
+//     }
+//     console.log("@@@@@@",test[2]);
+
+
+
+const notebook_id = Object.values(notebooks).forEach( notebook =>console.log("%%%%%",notebook.id))
+// console.log("$$$$$$$$$$", notebook_id[0]); 
     
-   
-   useEffect((notebooks)=>{
+   useEffect(()=>{
        if(deleteANotebook){
            dispatch(DeleteNotebook())
        }
    })
-    
-    
+      
    useEffect(() => {
        dispatch(loadNotebooks(id))
    },[dispatch]);
@@ -34,12 +37,20 @@ const NotebookNav =({id}) => {
     return(
         <>
         <div>
-            <select>
+           
                 {notebooks ? Object.values(notebooks).map((notebook) =>
-                <option value = {notebook.title}>{notebook.title}</option>
+                <>
+                 <select>
+                    <option value = {notebook.title}>{notebook.title}</option>
+                </select>    
+                    <div>
+                        <button onClick={()=>dispatch(DeleteNotebook(notebook.id))} >Delete Notebook</button>
+                    </div>
+                
+                </>
                 ): null}                
-            </select>
-            <button onClick={()=>dispatch(DeleteNotebook(test.id))} >Delete Notebook</button>
+            
+           
             <button>Edit Notebook</button>           
         </div>
         </>
