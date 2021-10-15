@@ -6,11 +6,19 @@ import { Modal } from "../../context/Modal";
 import NewNotebook from "./newNotebook"
 import * as notebookActions from "../../store/notebook";
 import NotebookNav from "./notebookNav";
+import { useHistory } from "react-router-dom";
 
 const Notebook = () => {
+  const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(store => store.session.user);
+    
+    if (sessionUser === undefined) {
+      history.push("/");
+      return null
+  }
     
     return(
         <>
