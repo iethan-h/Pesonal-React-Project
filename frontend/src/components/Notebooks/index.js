@@ -29,6 +29,9 @@ const Notebook = () => {
       <div>       
           <button
             onClick={() => setShowModal(true)}>New Notebook</button>
+            <div>
+              <p>Select a notebook...</p>
+            </div>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <NewNotebook />

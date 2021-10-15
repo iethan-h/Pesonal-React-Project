@@ -11,6 +11,7 @@ import Footer from "./components/footer";
 import Home from "./components/home-page";
 import LandingPage from "./components/landingPage";
 import Notebook from "./components/Notebooks";
+import NotebookInfo from "./components/Notebooks/notebookInfo"
 
 
 function App() {
@@ -34,7 +35,11 @@ function App() {
           <LandingPage />
         </Route>
           <Route path="/home">
+            <Home />
             <Notebook />
+          </Route>
+          <Route path="/notebook/:notebook_id">
+            <NotebookInfo />
           </Route>
         <Route>
           <h1>Page not found</h1>

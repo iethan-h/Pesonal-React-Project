@@ -1,12 +1,20 @@
 /* eslint-disable no-unused-vars */
 import { csrfFetch } from "./csrf";
-const LOAD_NOTEBOOK = "notebooks/load";
+const LOAD_NOTEBOOK = "notebook/get"
+const LOAD_NOTEBOOKS = "notebooks/load";
 const CREATE_NOTEBOOK = "notebooks/add";
 const EDIT_NOTEBOOK = "notebooks/update";
 const DELETE_NOTEBOOK = "notebooks/remove";
 
 //Actions
-export const loadNotebook = (notebook) => {
+export const loadAllNotebooks = (notebook) => {
+  return {
+    type: LOAD_NOTEBOOKS,
+    notebook,
+  };
+};
+
+export const loadANotebook = (notebook) => {
   return {
     type: LOAD_NOTEBOOK,
     notebook,
@@ -65,6 +73,14 @@ export const DeleteNotebook = (notebook_id) => async(dispatch) => {
 
 export const loadNotebooks = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/notebooks/${id}`);
+  const notebooks = await res.json();  
+  dispatch(loadAllNotebooks(notebooks));
+  
+  return res;
+};
+
+export const loadNotebook = (id,notebook_id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/notebook/${id}/notebooks/${notebook_id}`);
   const notebooks = await res.json();
   dispatch(loadNotebook(notebooks));
   return res;
@@ -91,14 +107,25 @@ const initialState = {};
 const notebookReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case LOAD_NOTEBOOK: {
-      const notebookList = {};
+    case LOAD_NOTEBOOKS: {
+      const notebookList = {};     
       action.notebook.forEach((notebook) => {
         notebookList[notebook.id] = notebook;
       });
       return {
         ...state,
         ...notebookList,
+      };
+    }
+    
+    case LOAD_NOTEBOOK: {
+      const newState = {...state};
+      newState.currentNotebook=action.notebook   
+      newState[action.notebook.id] = action.notebook;
+     
+      return {
+        ...state,
+        ...newState,
       };
     }
       
