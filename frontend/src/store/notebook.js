@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { csrfFetch } from "./csrf";
-const LOAD_NOTEBOOK = "notebook/load";
-const CREATE_NOTEBOOK = "notebook/add";
-const EDIT_NOTEBOOK = "notebook/update";
-const DELETE_NOTEBOOK = "notebook/remove";
+const LOAD_NOTEBOOK = "notebooks/load";
+const CREATE_NOTEBOOK = "notebooks/add";
+const EDIT_NOTEBOOK = "notebooks/update";
+const DELETE_NOTEBOOK = "notebooks/remove";
 
 
 export const loadNotebook = (notebook) => {
@@ -20,15 +20,17 @@ export const addNotebook = (notebook) =>{
   }
 }
 
-export const CreateNotebook = (title, userId) => async(dispatch) => {
-  const response = await csrfFetch("/api/notebook", {
+export const CreateNotebook = (title, id) => async(dispatch) => {
+  console.log("####")
+  const response = await csrfFetch("/api/notebooks", {
       method:"POST",
+      header:{"Content-Type":"application/json"},  
       body: JSON.stringify({
-          userId,
+          id,
           title,          
       }),
   });
-
+console.log("$$$$$",response);
   const data = await response.json();
   dispatch(addNotebook(data));
   return response;
