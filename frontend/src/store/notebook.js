@@ -5,7 +5,7 @@ const CREATE_NOTEBOOK = "notebooks/add";
 const EDIT_NOTEBOOK = "notebooks/update";
 const DELETE_NOTEBOOK = "notebooks/remove";
 
-
+//Actions
 export const loadNotebook = (notebook) => {
   return {
     type: LOAD_NOTEBOOK,
@@ -20,6 +20,21 @@ export const addNotebook = (notebook) =>{
   }
 }
 
+export const deleteNotebook = (notebook_id) => {
+  return {
+    type: DELETE_NOTEBOOK,
+    notebook_id,
+  };
+};
+
+export const editNotebook = (notebookId) => {
+  return {
+    type: EDIT_NOTEBOOK,
+    notebookId,
+  };
+};
+
+//Thunks
 export const CreateNotebook = (title, user_id) => async(dispatch) => {
   console.log("####")
   const response = await csrfFetch("/api/notebooks", {
@@ -30,40 +45,23 @@ export const CreateNotebook = (title, user_id) => async(dispatch) => {
           user_id,         
       }),
   });
-console.log("$$$$$",response);
+
   const data = await response.json();
   dispatch(addNotebook(data));
   return response;
 }
 
-
 export const DeleteNotebook = (notebook_id) => async(dispatch) => {
-  console.log("$$$$",notebook_id);
+
     const  response = await csrfFetch(`/api/notebook/${notebook_id}`,{
       method:"DELETE",
       header:{"Content-Type":"application/json"}      
     })
-    return response;
-  }
-//Edit a notebook
-
-export const editNotebook = (notebookId) => {
-  return {
-    type: EDIT_NOTEBOOK,
-    notebookId,
+    if (response.ok){
+      const notebook_id = await response.json();
+      dispatch(deleteNotebook(notebook_id));
+    }
   };
-};
-
-//Delete a notebook.
-
-export const deleteNotebook = (notebookId) => {
-  return {
-    type: DELETE_NOTEBOOK,
-    notebookId,
-  };
-};
-
-//Load notebooks
 
 export const loadNotebooks = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/notebooks/${id}`);
@@ -72,6 +70,19 @@ export const loadNotebooks = (id) => async (dispatch) => {
   return res;
 };
 
+export const EditNotebook = (payload,id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notebooks/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const notebook = await response.json();
+    dispatch(editNotebook(notebook));
+  }
+};
+
+
 
 const initialState = {};
 
@@ -79,15 +90,7 @@ const initialState = {};
 
 const notebookReducer = (state = initialState, action) => {
   switch (action.type) {
-    
-      case DELETE_NOTEBOOK:{
-        const newState = { ...state };
-        delete newState[action.itemId];
-        return newState;
-      
-    }
-    
-    
+
     case LOAD_NOTEBOOK: {
       const notebookList = {};
       action.notebook.forEach((notebook) => {
@@ -98,15 +101,29 @@ const notebookReducer = (state = initialState, action) => {
         ...notebookList,
       };
     }
-    default:
-      return state;
       
-      case CREATE_NOTEBOOK:
+    case CREATE_NOTEBOOK:{
         return {
             ...state,
             [action.notebook.id]: action.notebook
-        }
-        
+    }
+  }
+  
+    case EDIT_NOTEBOOK:{
+      return {
+        ...state,
+        [action.notebook.id]: action.notebook,
+      };
+    }
+    
+      case DELETE_NOTEBOOK:{
+        const newState = { ...state };
+        delete newState[action.id];
+        return newState;     
+    }
+    
+    default:
+      return state;
     
   }
 };
