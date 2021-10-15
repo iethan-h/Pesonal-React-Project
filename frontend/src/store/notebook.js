@@ -61,7 +61,7 @@ export const CreateNotebook = (title, user_id) => async(dispatch) => {
 
 export const DeleteNotebook = (notebook_id) => async(dispatch) => {
 
-    const  response = await csrfFetch(`/api/notebook/${notebook_id}`,{
+    const  response = await csrfFetch(`/api/notebooks/${notebook_id}`,{
       method:"DELETE",
       header:{"Content-Type":"application/json"}      
     })
@@ -79,8 +79,9 @@ export const loadNotebooks = (id) => async (dispatch) => {
   return res;
 };
 
-export const loadNotebook = (id,notebook_id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/notebook/${id}/notebooks/${notebook_id}`);
+export const loadNotebook = (notebook_id) => async (dispatch) => {
+ 
+  const res = await csrfFetch(`/api/notebooks/${notebook_id}`);
   const notebook = await res.json();
   dispatch(loadANotebook(notebook));
   return res;
