@@ -33,6 +33,7 @@ router.get(
     const notebooks = await Notebook.findByPk(     
         notebook_id     
     );
+    console.log("ASDasdasd",notebooks);
     return res.json(notebooks);
   })
 );
@@ -55,11 +56,12 @@ router.delete(
 	asyncHandler(async (req, res, next) => {
 		const notebook_id = req.params.id;
 		const findNotebook = await Notebook.findByPk(notebook_id);
+    console.log("!!!!!!",findNotebook);
 		if (findNotebook) {
 			const notebook = await findNotebook.destroy();
 			res.status(204).end();
 		} else {
-			next();
+			console.log('Not Found');
 		}
 	})
 );
