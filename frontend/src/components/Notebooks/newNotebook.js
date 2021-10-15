@@ -5,7 +5,7 @@ import * as notebookActions from "../../store/notebook";
 
 const NewNotebook = (notebook) => {
     const dispatch = useDispatch();
-    const userId=useSelector((state)=>state.session.user.id)
+    const userId=useSelector((state)=>state?.session?.user?.id)
     //const [showModal, setShowModal] = useState(false);
     
     const [title,setTitle] = useState("");

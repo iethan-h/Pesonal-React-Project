@@ -20,14 +20,14 @@ export const addNotebook = (notebook) =>{
   }
 }
 
-export const CreateNotebook = (title, id) => async(dispatch) => {
+export const CreateNotebook = (title, user_id) => async(dispatch) => {
   console.log("####")
   const response = await csrfFetch("/api/notebooks", {
       method:"POST",
       header:{"Content-Type":"application/json"},  
       body: JSON.stringify({
-          id,
-          title,          
+          title,
+          user_id,         
       }),
   });
 console.log("$$$$$",response);

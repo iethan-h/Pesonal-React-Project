@@ -28,8 +28,8 @@ router.get(
 router.post(
   '/',  
   asyncHandler(async (req, res) =>{
-    const{title,userId:userId} = req.body;    
-    const notebook = await Notebook.create({title,user_id:userId});
+    const{title,user_id} = req.body;    
+    const notebook = await Notebook.create({title,user_id});
     res.json(notebook);
   })
 );
