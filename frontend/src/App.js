@@ -39,7 +39,7 @@ function App() {
             <Notebook />
           </Route>
           <Route path="/notebook/:notebook_id">
-            <NotebookInfo />
+            <NotebookInfo id = {sessionUser?.id} />
           </Route>
         <Route>
           <h1>Page not found</h1>

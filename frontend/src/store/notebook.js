@@ -81,8 +81,8 @@ export const loadNotebooks = (id) => async (dispatch) => {
 
 export const loadNotebook = (id,notebook_id) => async (dispatch) => {
   const res = await csrfFetch(`/api/notebook/${id}/notebooks/${notebook_id}`);
-  const notebooks = await res.json();
-  dispatch(loadNotebook(notebooks));
+  const notebook = await res.json();
+  dispatch(loadANotebook(notebook));
   return res;
 };
 
