@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Notebook = sequelize.define('Notebook', {
     user_id:{
+      allowNull: false,
      type: DataTypes.INTEGER,
       references: { model: "Users" },
     },
