@@ -26,14 +26,14 @@ router.get(
 
 //Get a single notebook
 router.get(
-  "/:id/notebooks/:notebook_id",
+  "/notebooks/:notebook_id",
   requireAuth,
   asyncHandler(async (req, res, next) => {
+    console.log("got here")
     const notebook_id = req.params.notebook_id;
     const notebooks = await Notebook.findByPk(     
         notebook_id     
     );
-    console.log("ASDasdasd",notebooks);
     return res.json(notebooks);
   })
 );
