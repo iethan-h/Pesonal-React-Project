@@ -35,9 +35,11 @@ console.log("$$$$$",response);
   dispatch(addNotebook(data));
   return response;
 }
-export const DeleteNotebook = (id) => async(dispatch) => {
-  console.log("$$$$",id);
-    const  response = await csrfFetch(`/api/notebook/${id}`,{
+
+
+export const DeleteNotebook = (notebook_id) => async(dispatch) => {
+  console.log("$$$$",notebook_id);
+    const  response = await csrfFetch(`/api/notebook/${notebook_id}`,{
       method:"DELETE",
       header:{"Content-Type":"application/json"}      
     })
