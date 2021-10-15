@@ -5,8 +5,11 @@ import { useDispatch,useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {loadNotebooks,DeleteNotebook} from "../../store/notebook"
 import {useEffect,useState} from 'react';
+import { useHistory } from "react-router-dom";
 
 const NotebookNav =({id}) => {
+    const history = useHistory();
+    const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
    //const notebooks=useSelector(state => state.notebookList);
    const notebooks = useSelector(state => state.notebookReducer);
@@ -33,6 +36,11 @@ const notebook_id = Object.values(notebooks).forEach( notebook =>console.log("%%
    useEffect(() => {
        dispatch(loadNotebooks(id))
    },[dispatch]);
+   
+   if (sessionUser === undefined) {
+    history.push("/");
+    return null
+}
    
     return(
         <>
