@@ -24,6 +24,19 @@ router.get(
   })
 );
 
+//Get a single notebook
+router.get(
+  "/:id/notebooks/:notebook_id",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const notebook_id = req.params.notebook_id;
+    const notebooks = await Notebook.findByPk(     
+        notebook_id     
+    );
+    return res.json(notebooks);
+  })
+);
+
 //Create a new notebook
 router.post(
   '/',  
