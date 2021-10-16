@@ -5,6 +5,7 @@ import { useDispatch,useSelector } from "react-redux";
 import {DeleteNotebook} from "../../store/notebook"
 import { useParams } from 'react-router-dom';
 import {loadNotebook} from "../../store/notebook"
+import {loadAllNotes} from "../../store/note"
 
 const NotebookInfo = ({id}) => {
     const {notebook_id} = useParams();
@@ -13,16 +14,22 @@ const NotebookInfo = ({id}) => {
     
     useEffect(() => {
         dispatch(loadNotebook(id,notebook_id))
+        dispatch(loadAllNotes(notebook_id))
     },[dispatch])
     
    
     
     return (
+        <>
         <div>
             <button onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button>
             <button>Edit Notebook</button>
             <button>New Note</button>
         </div>
+        <div>
+            <p>Notes:</p>
+        </div>
+        </>
     )
 }
 export default NotebookInfo;

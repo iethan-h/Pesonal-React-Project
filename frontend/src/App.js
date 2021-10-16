@@ -12,6 +12,7 @@ import Home from "./components/home-page";
 import LandingPage from "./components/landingPage";
 import Notebook from "./components/Notebooks";
 import NotebookInfo from "./components/Notebooks/notebookInfo"
+import Notes from "./components/Notes"
 
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/notebook/:notebook_id">
             <NotebookInfo id = {sessionUser?.id} />
+          </Route>
+          <Route path = "/notes">
+            <Notes />
           </Route>
         <Route>
           <h1>Page not found</h1>
