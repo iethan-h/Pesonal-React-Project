@@ -44,13 +44,13 @@ const deleteNote = (noteId) => {
 
 //Thunks
 
-export const CreateNote = (title, user_id) => async(dispatch) => { 
+export const CreateNote = ( user_id,content) => async(dispatch) => { 
   const response = await csrfFetch("/api/note", {
       method:"POST",
       header:{"Content-Type":"application/json"},  
-      body: JSON.stringify({
-          title,
-          user_id,         
+      body: JSON.stringify({    
+          user_id,      
+          content   
       }),
   });
   const data = await response.json();
@@ -59,21 +59,21 @@ export const CreateNote = (title, user_id) => async(dispatch) => {
 }
 
 export const loadAllNotes = (notebook_id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/notes/${notebook_id}`);
+  const response = await csrfFetch(`/api/note/${notebook_id}`);
   const notes = await response.json();
   dispatch(loadNotes(notes));
   return response;
 };
 
 export const loadANote = () => async (dispatch) => {
-  const response = await csrfFetch("/api/notes");
+  const response = await csrfFetch("/api/note");
   const notes = await response.json();
   dispatch(loadNote(notes));
   return response;
 };
 
 export const deleteANote = () => async (dispatch) => {
-  const response = await csrfFetch("/api/notes",{
+  const response = await csrfFetch("/api/note",{
     method:"DELETE",
     header:{"Content-Type":"application/json"} 
   })
