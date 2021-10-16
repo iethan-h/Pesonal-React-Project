@@ -1,8 +1,5 @@
 /* TODO Add site wide styles */
-html,body{
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+
 a{
     text-decoration: none;
     color: black;
@@ -17,6 +14,7 @@ button{
 button:hover{
     background-color:#86A688;
 }
+
 
 .footer{
     position: fixed;
@@ -50,4 +48,15 @@ button:hover{
 }
 hr{
    width:30%    
+}
+img{
+    height:60px;
+    width: 60px;
+}
+.imgage{
+    
+    display: flex;
+    margin: center;
+    justify-content:center;
+    align-items:center;
 }

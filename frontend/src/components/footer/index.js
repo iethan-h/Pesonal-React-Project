@@ -2,7 +2,9 @@
 
 const Footer = () =>{
     return(
-    <div id='line'>
+      <> 
+      <div className='main'>
+         <div id='line'>
        <hr></hr>   
         <div className="footer">                   
           <h3>How to contact me: </h3>
@@ -12,6 +14,8 @@ const Footer = () =>{
             </div>
         </div>
         </div>
+        </div>
+        </>
     )
 }
 
