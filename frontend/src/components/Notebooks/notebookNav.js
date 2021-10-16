@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import {loadNotebooks,DeleteNotebook} from "../../store/notebook"
 import {useEffect,useState} from 'react';
 import { useHistory } from "react-router-dom";
+import style from "./notebooks.module.css";
 
 const NotebookNav =({id}) => {
     const history = useHistory();
@@ -23,9 +24,15 @@ const NotebookNav =({id}) => {
 }
     return(
         <>
-        <div>                  
-                {notebooks ? Object.values(notebooks).map((notebook) =>                           
-                    <button onClick={() =>history.push(`/notebook/${notebook.id}`)}>{notebook.title}</button>
+         <div>
+              <p className={style.selected} >Select a notebook...</p>
+            </div>
+        <div className={style.notebooks}>                  
+                {notebooks ? Object.values(notebooks).map((notebook) =>       
+                
+                <div className={style.div}>              
+                    <button className={style.notebookButtons}onClick={() =>history.push(`/notebook/${notebook.id}`)}>{notebook.title}</button>
+                </div>
                     ): null}         
         </div>
         </>

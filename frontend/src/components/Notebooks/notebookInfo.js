@@ -28,6 +28,7 @@ const NotebookInfo = ({id}) => {
         </div>
         <div>
             <p>Notes:</p>
+            <textarea />
             
         </div>
         </>

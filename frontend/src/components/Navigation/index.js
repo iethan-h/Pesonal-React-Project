@@ -13,6 +13,7 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
      <>
+     <img src="https://res.cloudinary.com/dqfmsvodq/image/upload/v1634418182/UltiNotes/Untitled_design_1_yg3rz6.svg" alt="" />
       <NavLink exact to="/home">Home</NavLink>
       <ProfileButton user={sessionUser} />
       </>
@@ -20,6 +21,7 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
+      <img src="https://res.cloudinary.com/dqfmsvodq/image/upload/v1634418182/UltiNotes/Untitled_design_1_yg3rz6.svg" alt="" />
           <NavLink exact to="/">Home</NavLink> 
           <NavLink exact to="/demo">Demo</NavLink>
           <LoginFormModal />
