@@ -3,14 +3,32 @@
     margin: center;
     justify-content:center;
     align-items:center;
+    
+}
+.h1{
+    color:#86A688;
 }
 .welcomeLine{
     width:75%
 }
 .aboutApp{
     padding-top: 40px;
-    width:25%;
+    width:20%;
 }
 .statement{
     font-size:20px;
 }
+
+.newMember{
+    display: flex;
+    margin: center;
+    justify-content:center;
+    align-items:center;
+    transform: scale(2);
+}
+.infoLeftSide{
+    position: absolute;
+    right:0;
+    padding-top:50px;
+}
+

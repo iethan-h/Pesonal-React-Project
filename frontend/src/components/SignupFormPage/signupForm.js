@@ -19,7 +19,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    history.push("/home");
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
@@ -32,6 +32,8 @@ const SignupForm = () => {
     return setErrors([
       "Confirm Password field must be the same as the Password field",
     ]);
+    
+    
   };
 
   return (
