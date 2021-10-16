@@ -66,4 +66,9 @@ router.delete(
 	})
 );
 
+//Edit a notebook
+router.post(
+  '/notebook'
+  )
+
 module.exports = router;

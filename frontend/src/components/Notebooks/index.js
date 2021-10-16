@@ -42,7 +42,6 @@ const Notebook = () => {
        (<NotebookNav id={user.id} />) : null}
       
       <div>
-        {/* TODO: Map through the notebooks and display them in the dropdown */}
         
       </div>
     </div>   

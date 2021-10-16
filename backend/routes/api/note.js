@@ -17,13 +17,13 @@ const validateNote = [];
 
 //GET /notes => return all users notes
 router.get(
-  "/",
+  "/:notebook_id",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const userId = req.user.id;
+    const notebook_id = req.params.notebook_id;
     const notes = await Note.findAll({
       where: {
-        userId,
+        notebook_id
       },
     });
     return res.json(notes);
