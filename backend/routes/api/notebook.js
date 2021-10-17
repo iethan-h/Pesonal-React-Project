@@ -4,9 +4,10 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidatoinErros } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
-const { Notebook } = require("../../db/models");
+const { Notebook,Note } = require("../../db/models");
 const router = express.Router();
 const validateNotebook = [];
+
 
 
 // Get all notebooks that belong to a user
@@ -44,6 +45,7 @@ router.post(
   asyncHandler(async (req, res) =>{
     const{title,user_id} = req.body;    
     const notebook = await Notebook.create({title,user_id});
+    const note = await Note.create({user_id,notebook_id:notebook.id,content:""});
     res.json(notebook);
   })
 );
@@ -56,7 +58,7 @@ router.delete(
 	asyncHandler(async (req, res, next) => {
 		const notebook_id = req.params.id;
 		const findNotebook = await Notebook.findByPk(notebook_id);
-    console.log("!!!!!!",findNotebook);
+    const findNote = await Note.findByPk(note_id)
 		if (findNotebook) {
 			const notebook = await findNotebook.destroy();
 			res.status(204).end();
