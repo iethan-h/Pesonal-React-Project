@@ -1,0 +1,17 @@
+.notes{
+    resize: none;
+    width: 1000px;
+    height: 500px;
+  }
+  .notesDiv{  
+    display: flex;
+    margin: center;
+    justify-content:center;
+    align-items:center;
+  }
+  .message{
+    display: flex;
+    margin: center;
+    justify-content:center;
+    align-items:center;
+  }

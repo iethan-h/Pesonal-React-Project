@@ -2,30 +2,41 @@ import {useDispatch,useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {loadAllNotes} from '../../store/note';
 import { useHistory } from "react-router-dom";
+import style from "./notes.module.css"
 
 
-const Notes = () => {
+const Notes = ({setNoteId,setContent}) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const note = useSelector((state) => state.notesReducer);
-    console.log("*****",note);
+    const notes = useSelector((state) => Object.keys(state.notesReducer));
+    const myNote=useSelector((state) =>state.notesReducer);
+    
     
     
     useEffect(() => {
-       const test = dispatch(loadAllNotes);
-       console.log("*****",test);
+      dispatch(loadAllNotes);
     },[dispatch]);
     
     
     return(
         <>
-        <div>{console.log("TEST", note)}</div>
+        <div className={style.message}> 
+        {console.log("$$$$$",notes)}  
+        {notes.map((note) =>{
+            return(
+                <>
+                {setNoteId(myNote[note].id)}
+                {/* {setContent(myNote[note].content)} */}
+                <div className={style.notesDiv}>
+            <textarea onChange={setContent(myNote[note].content)} defaultValue={myNote[note].content} className={style.notes} />
+                </div>
+                
+                </>
+            )
+        }
         
-        <h1>Hello from Notes!</h1>
-        <div>
-        {Object.values(note).map((notes) => (                          
-                    <p>{notes[2].content}</p>
-        ))}    
+        )}
+            <h1>Learning starts now!{notes.id}</h1>
         </div>
         </>
     )
