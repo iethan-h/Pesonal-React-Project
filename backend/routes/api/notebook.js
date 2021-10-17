@@ -45,7 +45,7 @@ router.post(
   asyncHandler(async (req, res) =>{
     const{title,user_id} = req.body;    
     const notebook = await Notebook.create({title,user_id});
-    const note = await Note.create({user_id,notebook_id:notebook.id,content:""});
+   // const note = await Note.create({user_id,notebook_id:notebook.id,content:""});
     res.json(notebook);
   })
 );

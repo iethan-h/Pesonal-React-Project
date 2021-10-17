@@ -32,9 +32,9 @@ router.get(
 
 //Create a new note
 router.post(
-  '/:notebook_id',  
+  '/:id',  
   asyncHandler(async (req, res) =>{
-    const {notebook_id} = req.params
+    const {id} = req.params
     const{user_id,content} = req.body;    
     const note = await Note.create({user_id,notebook_id,content});
     res.json(note);
