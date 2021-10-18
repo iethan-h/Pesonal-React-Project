@@ -47,22 +47,17 @@ const NotebookInfo = ({id}) => {
            UpdateNote(contents,newMyNote?.notebook_id)
        )
 }
-
 const handleEditNotebook = (e) =>{
     e.preventDefault();
     const payload ={
         title
     }
     dispatch(EditNotebook(payload,notebook_id))
-}
-    
+}  
     return (
         <>
-        <div>
-            
-            <button onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button>
-            
-            
+        <div>     
+            <button onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button> 
             <button
                 onClick={() => setShowModal(true)}>
                 Edit Notebook
@@ -74,10 +69,7 @@ const handleEditNotebook = (e) =>{
         )}
         </div>
         <div>
-            
-            <div>
-                <p>{newMyNote?.content}</p>
-            </div>
+
         <div className={style.notesDiv}>
             <form onSubmit={handleSaveNote}>
                 <textarea 
