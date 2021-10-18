@@ -55,7 +55,6 @@ export const CreateNote = ( user_id,content) => async(dispatch) => {
   });
   const data = await response.json();
   dispatch(createNote(data));
-  console.log("$$$$$$",data);
   return response;
 }
 
@@ -63,7 +62,6 @@ export const CreateNote = ( user_id,content) => async(dispatch) => {
 export const loadAllNotes = (notebook_id) => async (dispatch) => {
   const response = await csrfFetch(`/api/note/${notebook_id}`);
   const notes = await response.json();
-  console.log("IN LOAD A NOTE CREATOR",notes);
   dispatch(loadNotes(notes));
   return response;
 };
@@ -95,7 +93,6 @@ export const UpdateNote = (payload,notebook_id) => async (dispatch) => {
     body:JSON.stringify(payload)
   });
   const updatedNote = await response.json();
-  console.log("UPDATED NOTE",updatedNote[1]);
   if(response.ok){
       
       dispatch(update(updatedNote[1]));  
@@ -107,28 +104,13 @@ const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     
     case LOAD_NOTES: {
-      // const notebookNotes = {};
-      // action.notes.forEach((note) => {
-      //   notebookNotes[note.id] = note;
-      // });
-      // return {
-      //   ...state,
-      //   ...notebookNotes,
-      // };
       const newState = {...state};
-    
-      //newState.currentNote=action.note  
       newState[action?.notes[0]?.id] = action?.notes[0];
-    console.log("LOAD NOTE NEW STATE",newState);
       return newState
     }
     case LOAD_NOTE:{
       const newState = {...state};
-    
-      //newState.currentNote=action.note  
       newState[action.note.id] = action.note;
-    console.log("LOAD NOTE NEW STATE",newState);
-    console.log("NEW DATA ADDED TO STATE",newState[action.note.id] );
       return newState
     }
     
@@ -139,10 +121,6 @@ const notesReducer = (state = initialState, action) => {
       }
     }
     case UPDATE_NOTE:{
-      console.log("STATE",{
-        ...state,
-        [action.updatedNote.id]: action.updatedNote,
-      })
       return {
         ...state,
         [action.updatedNote.id]: action.updatedNote,

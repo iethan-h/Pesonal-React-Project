@@ -30,7 +30,6 @@ router.get(
   "/notebooks/:notebook_id",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    console.log("got here")
     const notebook_id = req.params.notebook_id;
     const notebooks = await Notebook.findByPk(     
         notebook_id     
