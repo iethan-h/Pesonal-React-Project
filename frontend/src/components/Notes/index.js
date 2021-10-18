@@ -20,16 +20,13 @@ const Notes = ({setNoteId,setContent}) => {
     
     return(
         <>
-        <div className={style.message}> 
-        {console.log("$$$$$",notes)}  
+        <div className={style.message}>  
         {notes.map((note) =>{
             return(
                 <>
                 {setNoteId(myNote[note].id)}
                 {/* {setContent(myNote[note].content)} */}
-                <div className={style.notesDiv}>
-            <textarea onChange={setContent(myNote[note].content)} defaultValue={myNote[note].content} className={style.notes} />
-                </div>
+                
                 
                 </>
             )

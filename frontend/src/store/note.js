@@ -28,10 +28,10 @@ const createNote = (note) => {
   };
 };
 
-const update = (noteId) => {
+const update = (updatedNote) => {
   return {
     type: UPDATE_NOTE,
-    noteId,
+    updatedNote,
   };
 };
 
@@ -45,7 +45,7 @@ const deleteNote = (noteId) => {
 //Thunks
 
 export const CreateNote = ( user_id,content) => async(dispatch) => { 
-  const response = await csrfFetch("/api/note", {
+  const response = await csrfFetch("/api/note/", {
       method:"POST",
       header:{"Content-Type":"application/json"},  
       body: JSON.stringify({    
@@ -55,12 +55,15 @@ export const CreateNote = ( user_id,content) => async(dispatch) => {
   });
   const data = await response.json();
   dispatch(createNote(data));
+  console.log("$$$$$$",data);
   return response;
 }
+
 
 export const loadAllNotes = (notebook_id) => async (dispatch) => {
   const response = await csrfFetch(`/api/note/${notebook_id}`);
   const notes = await response.json();
+  console.log("IN LOAD A NOTE CREATOR",notes);
   dispatch(loadNotes(notes));
   return response;
 };
@@ -68,6 +71,7 @@ export const loadAllNotes = (notebook_id) => async (dispatch) => {
 export const loadANote = (notebook_id) => async (dispatch) => {
   const response = await csrfFetch(`/api/${notebook_id}`);
   const notes = await response.json();
+  
   dispatch(loadNote(notes));
   return response;
 };
@@ -84,41 +88,48 @@ export const deleteANote = () => async (dispatch) => {
 }
 
 export const UpdateNote = (payload,notebook_id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/${notebook_id}`,{
+  const response = await csrfFetch(`/api/note/${notebook_id}`,{
     method:"PUT",
 
     header:{"Content-Type":"application/json"} ,
     body:JSON.stringify(payload)
-  })
+  });
+  const updatedNote = await response.json();
+  console.log("UPDATED NOTE",updatedNote[1]);
   if(response.ok){
-      const note_id = await response.json();
-      dispatch(update(note_id));  
+      
+      dispatch(update(updatedNote[1]));  
   }
 }
 
 const initialState = {};
 const notesReducer = (state = initialState, action) => {
   switch (action.type) {
+    
     case LOAD_NOTES: {
-      const notebookNotes = {};
-      action.notes.forEach((note) => {
-        notebookNotes[note.id] = note;
-      });
-      return {
-        ...state,
-        ...notebookNotes,
-      };
+      // const notebookNotes = {};
+      // action.notes.forEach((note) => {
+      //   notebookNotes[note.id] = note;
+      // });
+      // return {
+      //   ...state,
+      //   ...notebookNotes,
+      // };
+      const newState = {...state};
+    
+      //newState.currentNote=action.note  
+      newState[action?.notes[0]?.id] = action?.notes[0];
+    console.log("LOAD NOTE NEW STATE",newState);
+      return newState
     }
     case LOAD_NOTE:{
       const newState = {...state};
     
       //newState.currentNote=action.note  
       newState[action.note.id] = action.note;
-    
-      return {
-        ...newState,
-        notes:action.note.id,
-      };
+    console.log("LOAD NOTE NEW STATE",newState);
+    console.log("NEW DATA ADDED TO STATE",newState[action.note.id] );
+      return newState
     }
     
     case CREATE_NOTE: {
@@ -128,9 +139,13 @@ const notesReducer = (state = initialState, action) => {
       }
     }
     case UPDATE_NOTE:{
+      console.log("STATE",{
+        ...state,
+        [action.updatedNote.id]: action.updatedNote,
+      })
       return {
         ...state,
-        [action.note.id]: action.note,
+        [action.updatedNote.id]: action.updatedNote,
       };
     }
     case DELETE_NOTE: {
