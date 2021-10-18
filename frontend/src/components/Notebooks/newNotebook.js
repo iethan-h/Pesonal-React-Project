@@ -30,6 +30,7 @@ const NewNotebook = (notebook) => {
     };
     return(
         <div>
+         
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Make a new Notebook</legend>

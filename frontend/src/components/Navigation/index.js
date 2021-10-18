@@ -14,7 +14,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   
   const demoUser = async () => {
-    history.push("/home")
+    history.push("/home");
     return dispatch(sessionActions.login({credential: "Demo-lition", password: 'password'}))
   }
 

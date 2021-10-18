@@ -1,15 +1,58 @@
 .notebooks{
-    display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+  display: flex;
+  justify-content: center;
+  padding-right: 10px;
 }
 .div{
   padding-top: 5px;
 }
 .notebookButtons{
     font-size: 19px;
+    margin-right: 10px;
     
 }
 .selected{
-    font-size: 20px;
+    font-size: 40px;
+}
+.notebook{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+.newNotebook{
+  padding-left: 40px;
+}
+.notes{
+  
+  resize: none;
+  width: 1000px;
+  height: 500px;
+}
+.notesDiv{ 
+  padding-top: 10px; 
+  display: flex;
+  margin: center;
+  justify-content:center;
+  align-items:center;
+}
+.message{
+  display: flex;
+  margin: center;
+  justify-content:center;
+  align-items:center;
+}
+.submit{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+.notebookOptions{
+  margin-right: 10px;
+}
+.optionsDiv{
+  padding-left: 15px;
+}
+textarea{
+  font-size:30px;
+  font-family: 'indie flower';
 }

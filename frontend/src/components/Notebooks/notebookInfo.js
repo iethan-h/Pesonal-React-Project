@@ -56,9 +56,13 @@ const handleEditNotebook = (e) =>{
 }  
     return (
         <>
-        <div>     
-            <button onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button> 
+        <div className={style.optionsDiv}>  
+            <p>You have a few options... </p>   
+            <button 
+            className={style.notebookOptions}
+            onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button> 
             <button
+            className={style.notebookOptions}
                 onClick={() => setShowModal(true)}>
                 Edit Notebook
             </button>
@@ -77,7 +81,9 @@ const handleEditNotebook = (e) =>{
                 defaultValue={oldText} 
                 className={style.notes} 
                 />
+                <div className={style.submit}>
                  <button type="submit" >Save Note</button>
+                 </div>
              </form>
         </div>
         </div>

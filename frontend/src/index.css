@@ -50,6 +50,7 @@ button:hover{
     width: 100%
 }
 hr{
+    color:black;
    width:30%    
 }
 img{
@@ -62,4 +63,10 @@ img{
     margin: center;
     justify-content:center;
     align-items:center;
+}
+*{
+    background-color:#f8f8ff;
+}
+button{
+    background-color:white;
 }
