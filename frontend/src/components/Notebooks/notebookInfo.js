@@ -11,10 +11,12 @@ import Notes from "../Notes"
 import { UpdateNote } from '../../store/note';
 import { Modal } from "../../context/Modal";
 import  EditMyNotebook  from './editNotebook';
+import { useHistory } from "react-router-dom";
 
 
 
 const NotebookInfo = ({id}) => {
+    const history = useHistory();
     const [showModal, setShowModal] = useState(false);
     const[content,setContent]=useState("");
     const {notebook_id} = useParams();
@@ -54,13 +56,17 @@ const handleEditNotebook = (e) =>{
     }
     dispatch(EditNotebook(payload,notebook_id))
 }  
+const handleDelete = (e) => {
+    history.push("/home")
+    dispatch(DeleteNotebook(notebook_id))
+}
     return (
         <>
         <div className={style.optionsDiv}>  
             <p>You have a few options... </p>   
             <button 
             className={style.notebookOptions}
-            onClick={() =>dispatch(DeleteNotebook(notebook_id))}>Delete Notebook</button> 
+            onClick={handleDelete} >Delete Notebook</button> 
             <button
             className={style.notebookOptions}
                 onClick={() => setShowModal(true)}>
