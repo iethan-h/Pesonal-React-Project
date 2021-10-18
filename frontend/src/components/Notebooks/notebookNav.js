@@ -24,15 +24,14 @@ const NotebookNav =({id}) => {
 }
     return(
         <>
-         <div>
+         <div className={style.notebook}>
               <p className={style.selected} >Select a notebook...</p>
             </div>
         <div className={style.notebooks}>                  
                 {notebooks ? Object.values(notebooks).map((notebook) =>       
-                
-                <div className={style.div}>              
+                            
                     <button className={style.notebookButtons}onClick={() =>history.push(`/notebook/${notebook.id}`)}>{notebook.title}</button>
-                </div>
+                
                     ): null}         
         </div>
         </>

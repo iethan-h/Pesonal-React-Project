@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./home.module.css";
-import { useHistory } from "react-router-dom";
 
  
 

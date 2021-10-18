@@ -24,10 +24,9 @@ const Notebook = () => {
     return(
         <>
     <div>
-        
-      <div>
-      </div>
-      <div>       
+   
+      <div className={style.newNotebook}>   
+      <p>Make a new notebook</p>    
           <button
             onClick={() => setShowModal(true)}>New Notebook</button>
         {showModal && (
