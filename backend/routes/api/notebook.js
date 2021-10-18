@@ -45,7 +45,7 @@ router.post(
   asyncHandler(async (req, res) =>{
     const{title,user_id} = req.body;    
     const notebook = await Notebook.create({title,user_id});
-   // const note = await Note.create({user_id,notebook_id:notebook.id,content:""});
+    const note = await Note.create({user_id,notebook_id:notebook.id,content:""});
     res.json(notebook);
   })
 );
@@ -58,7 +58,7 @@ router.delete(
 	asyncHandler(async (req, res, next) => {
 		const notebook_id = req.params.id;
 		const findNotebook = await Notebook.findByPk(notebook_id);
-    const findNote = await Note.findByPk(note_id)
+    const findNote = await Note.findByPk(Note.id)
 		if (findNotebook) {
 			const notebook = await findNotebook.destroy();
 			res.status(204).end();
@@ -69,8 +69,17 @@ router.delete(
 );
 
 //Edit a notebook
-router.post(
-  '/notebook'
+router.put(
+  '/:id',
+  asyncHandler(async (req,res) => {
+    const notebook = await Notebook.findByPk(
+    req.params.id
+  )
+  notebook.update(req.body);
+  return res.json(notebook);
+  })
+  
+  
   )
 
 module.exports = router;

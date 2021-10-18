@@ -35,10 +35,10 @@ export const deleteNotebook = (notebook_id) => {
   };
 };
 
-export const editNotebook = (notebookId) => {
+export const editNotebook = (notebook_id) => {
   return {
     type: EDIT_NOTEBOOK,
-    notebookId,
+    notebook_id,
   };
 };
 
@@ -81,20 +81,21 @@ export const loadNotebook = (notebook_id) => async (dispatch) => {
  
   const res = await csrfFetch(`/api/notebooks/${notebook_id}`);
   const notebook = await res.json();
-  console.log("TESTTTT",notebook);
+ 
   dispatch(loadANotebook(notebook));
   return res;
 };
 
-export const EditNotebook = (payload,id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/notebooks/${id}`, {
-    method: "PATCH",
+export const EditNotebook = (payload,notebook_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notebooks/${notebook_id}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   if (response.ok) {
     const notebook = await response.json();
     dispatch(editNotebook(notebook));
+    return notebook;
   }
 };
 
@@ -139,7 +140,7 @@ const notebookReducer = (state = initialState, action) => {
     case EDIT_NOTEBOOK:{
       return {
         ...state,
-        [action.notebook.id]: action.notebook,
+        [action.notebook_id.id]: action.notebook_id,
       };
     }
     

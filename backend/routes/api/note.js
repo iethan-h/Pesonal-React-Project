@@ -32,11 +32,28 @@ router.get(
 
 //Create a new note
 router.post(
-  '/:id',  
+  '/:notebook_id',  
   asyncHandler(async (req, res) =>{
     const {id} = req.params
     const{user_id,content} = req.body;    
     const note = await Note.create({user_id,notebook_id,content});
+    res.json(note);
+  })
+)
+
+//UpdateNote
+router.put(
+  '/:notebook_id',  
+  asyncHandler(async (req, res) =>{
+   
+    const {notebook_id} = req.params
+    const{id,user_id,content} = req.body;    
+    const note = await Note.update({user_id,notebook_id,content},{
+      where:{id:id},
+      returning: true,
+      plain: true
+    });
+
     res.json(note);
   })
 )
